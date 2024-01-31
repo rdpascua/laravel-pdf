@@ -317,7 +317,11 @@ class PdfBuilder implements Responsable
             ? BrowsershotLambda::class
             : Browsershot::class;
 
-        $browsershot = $browsershotClass::html($this->getHtml());
+        $browsershot = $browsershotClass::html($this->getHtml())
+            ->setNodeBinary(config('pdf.node'));
+            ->setNpmBinary(config('pdf.npm'));
+            ->setIncludePath(config('pdf.includePath'));
+
 
         $browsershot->showBackground();
 
